@@ -250,9 +250,20 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+bgg@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bgg/-/bgg-1.0.1.tgz#8dd9255fd4a1e4def5eaf12a0dda614682f566c4"
+  dependencies:
+    rest "~1.3.1"
+    xml2json "~0.6.1"
+
 binary-extensions@^1.0.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.8.0.tgz#48ec8d16df4377eae5fa5884682480af4d95c774"
+
+bindings@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
 block-stream@*:
   version "0.0.9"
@@ -996,13 +1007,20 @@ ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-nan@^2.3.0:
+nan@^2.3.0, nan@^2.3.5:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.5.1.tgz#d5b01691253326a97a2bbee9e61c55d8d60351e2"
 
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+node-expat@^2.3.7:
+  version "2.3.15"
+  resolved "https://registry.yarnpkg.com/node-expat/-/node-expat-2.3.15.tgz#96a53a0bc00649daf78f4fc074a23e644c223b4c"
+  dependencies:
+    bindings "^1.2.1"
+    nan "^2.3.5"
 
 node-pre-gyp@^0.6.29:
   version "0.6.33"
@@ -1255,6 +1273,12 @@ request@^2.79.0:
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
+rest@~1.3.1:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/rest/-/rest-1.3.2.tgz#0419b64a1434c72f9b15804adcc9d3505924707b"
+  dependencies:
+    when "~3"
+
 rimraf@2, rimraf@~2.5.1, rimraf@~2.5.4:
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.5.4.tgz#96800093cbf1a0c86bd95b4625467535c29dfa04"
@@ -1495,6 +1519,10 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
+when@~3:
+  version "3.7.7"
+  resolved "https://registry.yarnpkg.com/when/-/when-3.7.7.tgz#aba03fc3bb736d6c88b091d013d8a8e590d84718"
+
 wide-align@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.0.tgz#40edde802a71fea1f070da3e62dcda2e7add96ad"
@@ -1504,6 +1532,12 @@ wide-align@^1.1.0:
 wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+
+xml2json@~0.6.1:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/xml2json/-/xml2json-0.6.2.tgz#7cd18307cd7de13ca9bccc57c9c9dea3b3503203"
+  dependencies:
+    node-expat "^2.3.7"
 
 xtend@^4.0.0:
   version "4.0.1"
