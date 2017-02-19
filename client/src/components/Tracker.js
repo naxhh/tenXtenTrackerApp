@@ -11,7 +11,7 @@ export default class Tracker extends Component {
   boardGameBuilder(game) {
     return (
       <li key={game.id}>
-        <BoardGame title={game.title} thumbnail={game.thumbnail} />
+        <BoardGame title={game.title} thumbnail={game.thumbnail} playCount={game.plays} />
         <p onClick={() => this.props.onRemoveClick(game.id)}>x</p>
       </li>
     )
@@ -33,13 +33,12 @@ Tracker.propTypes = {
   games: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string.isRequired
+    thumbnail: PropTypes.string.isRequired,
+    plays: PropTypes.number.isRequired
   })),
   onRemoveClick: PropTypes.func.isRequired
 }
 
 Tracker.defaultProps = {
-  games: [
-    {id: '220653', title: 'Gloomhaven', thumbnail: '//cf.geekdo-images.com/images/pic3122349_t.jpg'}
-  ]
+  games: []
 }

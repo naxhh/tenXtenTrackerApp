@@ -38,9 +38,5 @@ GamesCollection.propTypes = {
 }
 
 GamesCollection.defaultProps = {
-  games: [
-    {id: '220653', title: 'Gloomhaven', thumbnail: '//cf.geekdo-images.com/images/pic3122349_t.jpg'},
-    {id: '156858', title: 'Santorini', thumbnail: '//cf.geekdo-images.com/images/pic3010368_t.jpg'},
-    {id: '209660', title: 'Sherlock Holmes Consulting Detective: Jack the Ripper &amp; West End Adventures', thumbnail: '//cf.geekdo-images.com/images/pic3285236_t.jpg'}
-  ]
+  games: []
 }

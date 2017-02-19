@@ -2,10 +2,16 @@ import React, { Component, PropTypes } from 'react'
 
 export default class BoardGame extends Component {
   render() {
+    const {
+      title,
+      playCount,
+      thumbnail
+    } = this.props
+
     return (
       <div>
-        <p>{this.props.title}</p>
-        <img src={this.props.thumbnail} alt={this.props.title} />
+        <p>{title} {playCount && playCount}</p>
+        <img src={thumbnail} alt={title} />
       </div>
     )
   }
@@ -14,5 +20,6 @@ export default class BoardGame extends Component {
 
 BoardGame.propTypes = {
   title: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired
+  thumbnail: PropTypes.string.isRequired,
+  playCount: PropTypes.number
 }

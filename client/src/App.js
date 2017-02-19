@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import BggUsernameInput from './components/BggUsernameInput'
-import GamesCollection from './components/GamesCollection'
-import Tracker from './components/Tracker'
+import BggUsernameInputContainer from './components/BggUsernameInputContainer'
+import GamesCollectionContainer from './components/GamesCollectionContainer'
+import TrackerContainer from './components/TrackerContainer'
 
 class App extends Component {
   render() {
@@ -11,9 +11,9 @@ class App extends Component {
         <div id="header">
             <h1>10x10 Challenge Tracker!</h1>
         </div>
-        <BggUsernameInput searchCollection={console.log} />
-        <GamesCollection onGameClick={id => console.log(`Addng game with id ${id} to tracker`)} />
-        <Tracker onRemoveClick={id => console.log(`Removing game with id ${id}`)} />
+        <BggUsernameInputContainer />
+        <GamesCollectionContainer />
+        <TrackerContainer />
       </div>
     )
   }
