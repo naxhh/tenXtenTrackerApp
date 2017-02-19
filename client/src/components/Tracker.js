@@ -18,12 +18,15 @@ export default class Tracker extends Component {
   }
 
   render() {
+    const {games} = this.props
+
     return (
       <div>
         <h3>Games in your 10x10</h3>
         <ul>
-          {this.props.games.map(this.boardGameBuilder)}
+          {games.map(this.boardGameBuilder)}
         </ul>
+        <button disabled={games.length === 0}>Create tracker</button>
       </div>
     )
   }
