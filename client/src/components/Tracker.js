@@ -30,7 +30,11 @@ export default class Tracker extends Component {
 }
 
 Tracker.propTypes = {
-  games: PropTypes.array,
+  games: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired
+  })),
   onRemoveClick: PropTypes.func.isRequired
 }
 
