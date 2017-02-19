@@ -21,6 +21,24 @@ state = {
     ]
 }
 
+Thinking new App State, allowing multiple users
+
+state = {
+  username: ''
+  collection: [
+    'username': {
+      isFetching: true,
+      lastUpdated: 0
+      games: [
+        {id: 0, title: '', thumbnail: '', plays: 0, fetchingPlays: true, lastUpdatedPlays: 0}
+      ]
+    }
+  ],
+  tracker: {
+    'username': [id, id, id]
+  }
+}
+
 */
 
 function username(state = '', action) {
