@@ -3,6 +3,21 @@
 This app request the list of your 10 x 10 boardgames and provides information about how many times you have played that game
 The app retrieves the information from BGG
 
+## Why do this?
+
+Same reason of everything I do on Github. Learn
+
+## WIP
+
+This APP is still in work in progress.
+Main components and redux layout is already in place but it requires a bit of plugging things
+
+Things you will not found yet
+- Styles for the APP
+- The final page where you have your games and play counts
+- The final games stored in local storage for fast load + also pwa
+- React router to allow that final page 
+
 ### Notes
 The home will request your BGG game and retrieve your collection of games
 NOTE: since the collection can be processed on the background we will display the TOP games meanwhile.
