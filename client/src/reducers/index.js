@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import {
   SEARCH_USER_COLLECTION,
+  RECEIVE_USER_COLLECTION,
   ADD_GAME_TO_TRACKER,
   REMOVE_GAME_FROM_TRACKER,
   REQUEST_GAME_PLAYS,
@@ -11,6 +12,7 @@ import {
 /* App State
 
 state = {
+    username: '',
     boardgames: [
       {id: 0, title: '', thumbnail: ''}
     ],
@@ -30,21 +32,11 @@ function username(state = '', action) {
   }
 }
 
-function boardgames(state/* = []*/, action) {
-  // Default data for testing
-  if (typeof state === 'undefined') {
-    state = [
-      {id: '161936', title: 'Pademic', thumbnail: '//cf.geekdo-images.com/images/pic3122349_t.jpg'},
-      {id: '156858', title: 'Santorini', thumbnail: '//cf.geekdo-images.com/images/pic3010368_t.jpg'},
-      {id: '209660', title: 'Sherlock Holmes Consulting Detective: Jack the Ripper &amp; West End Adventures', thumbnail: '//cf.geekdo-images.com/images/pic3285236_t.jpg'}
-    ]
-  }
+function boardgames(state = [], action) {
 
-  switch (action.type) {
-    case 'SAVE_COLLECTION_FROM_USER':
+  switch (action.type) { // @TODO: Handle loading and error
+    case RECEIVE_USER_COLLECTION:
       return action.collection
-    case 'SAVE_GAMES':
-      return action.games
     default:
       return state
   }

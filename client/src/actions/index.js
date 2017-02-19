@@ -7,6 +7,8 @@ export const REMOVE_GAME_FROM_TRACKER = 'REMOVE_GAME_FROM_TRACKER'
 
 // Network action types
 export const REQUEST_USER_COLLECTION = 'REQUEST_USER_COLLECTION'
+export const RECEIVE_USER_COLLECTION = 'RECEIVE_USER_COLLECTION'
+export const REQUEST_USER_COLLECTION_FAILED = 'REQUEST_USER_COLLECTION_FAILED'
 
 export const REQUEST_GAME_PLAYS = 'REQUEST_GAME_PLAYS'
 export const RECEIVE_GAME_PLAYS = 'RECEIVE_GAME_PLAYS'
@@ -16,7 +18,29 @@ export const REQUEST_GAME_PLAYS_FAILED = 'REQUEST_GAME_PLAYS_FAILED'
 // Action creators
 
 export function searchUserCollection(username) {
-  return {type: SEARCH_USER_COLLECTION, username}
+  return function(dispatch) {
+    // Add the username to the state
+    dispatch({type: SEARCH_USER_COLLECTION, username})
+
+    // Fetch data
+    dispatch(requestUserCollection(username))
+
+    return fetchUserCollection(username)
+      .then(response => response.json())
+      .then(payload => dispatch(receiveUserCollection(username, payload)))
+      .catch(response => dispatch(requestUserCollectionFailed(username)))
+  }
+}
+
+function fetchUserCollection(username) {
+  return fetch(`/api/collection?username=${username}`)
+    .then(response => {
+      if (response.status === 202) { // @TODO: retry method?
+        return fetchUserCollection(username)
+      }
+
+      return response
+    })
 }
 
 export function addGameToTracker(id) {
@@ -33,6 +57,7 @@ export function addGameToTracker(id) {
 
     // Fetch data
     dispatch(requestGamePlays(username, id))
+
     return fetch(`/api/plays?username=${username}&id=${id}`)
       .then(response => response.json())
       .then(payload => dispatch(receiveGamePlays(username, id, payload)))
@@ -43,8 +68,6 @@ export function addGameToTracker(id) {
 export function removeGameFromTracker(id) {
   return {type: REMOVE_GAME_FROM_TRACKER, id}
 }
-
-// Network action creators
 
 export function requestGamePlays(username, id) {
   return {type: REQUEST_GAME_PLAYS, username, id}
@@ -66,4 +89,26 @@ export function requestGamePlaysFailed(username, id) {
     username,
     id
   }
+}
+
+export function requestUserCollection(username) {
+  return {type: REQUEST_USER_COLLECTION, username}
+}
+
+export function receiveUserCollection(username, json) {
+  return {
+    type: RECEIVE_USER_COLLECTION,
+    collection: json.items.item.map(item => {
+      const {objectid, name, thumbnail} = item
+      return {
+        id: objectid,
+        title: name.$t,
+        thumbnail: thumbnail
+      }
+    })
+  }
+}
+
+export function requestUserCollectionFailed(username) {
+  return {type: REQUEST_GAME_PLAYS_FAILED, username}
 }
