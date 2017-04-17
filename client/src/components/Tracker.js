@@ -12,7 +12,7 @@ export default class Tracker extends Component {
     return (
       <li key={game.id}>
         <BoardGame title={game.title} thumbnail={game.thumbnail} playCount={game.plays} />
-        <p onClick={() => this.props.onRemoveClick(game.id)}>x</p>
+        <p onClick={() => this.props.onRemoveClick(this.props.username, game.id)}>x</p>
       </li>
     )
   }
@@ -33,6 +33,7 @@ export default class Tracker extends Component {
 }
 
 Tracker.propTypes = {
+  username: PropTypes.string,
   games: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

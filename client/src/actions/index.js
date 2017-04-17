@@ -8,6 +8,7 @@ export const REMOVE_GAME_FROM_TRACKER = 'REMOVE_GAME_FROM_TRACKER'
 // Network action types
 export const REQUEST_USER_COLLECTION = 'REQUEST_USER_COLLECTION'
 export const RECEIVE_USER_COLLECTION = 'RECEIVE_USER_COLLECTION'
+export const STORE_USER_COLLECTION = 'STORE_USER_COLLECTION'
 export const REQUEST_USER_COLLECTION_FAILED = 'REQUEST_USER_COLLECTION_FAILED'
 
 export const REQUEST_GAME_PLAYS = 'REQUEST_GAME_PLAYS'
@@ -27,7 +28,12 @@ export function searchUserCollection(username) {
 
     return fetchUserCollection(username)
       .then(response => response.json())
-      .then(payload => dispatch(receiveUserCollection(username, payload)))
+      .then(payload => {
+        const receiveUser = receiveUserCollection(payload)
+        dispatch(receiveUser)
+        return receiveUser
+      })
+      .then(receiveUser => dispatch(storeUserCollection(username, receiveUser.collection)))
       .catch(response => dispatch(requestUserCollectionFailed(username)))
   }
 }
@@ -46,14 +52,15 @@ function fetchUserCollection(username) {
 export function addGameToTracker(id) {
   return function(dispatch, getState) {
     const {tracker, username} = getState()
+    const userTracker = tracker[username] || []
 
     // If the game is already in the tracker, we don't do anything
-    if (tracker.find(track => track.id === id)) {
+    if (userTracker.find(track => track.id === id)) {
       return Promise.resolve()
     }
 
     // Add the game to our tracker
-    dispatch({type: ADD_GAME_TO_TRACKER, id})
+    dispatch({type: ADD_GAME_TO_TRACKER, username, id})
 
     // Fetch data
     dispatch(requestGamePlays(username, id))
@@ -65,8 +72,8 @@ export function addGameToTracker(id) {
   }
 }
 
-export function removeGameFromTracker(id) {
-  return {type: REMOVE_GAME_FROM_TRACKER, id}
+export function removeGameFromTracker(username, id) {
+  return {type: REMOVE_GAME_FROM_TRACKER, username, id}
 }
 
 export function requestGamePlays(username, id) {
@@ -95,7 +102,7 @@ export function requestUserCollection(username) {
   return {type: REQUEST_USER_COLLECTION, username}
 }
 
-export function receiveUserCollection(username, json) {
+export function receiveUserCollection(json) {
   return {
     type: RECEIVE_USER_COLLECTION,
     collection: json.items.item.map(item => {
@@ -107,6 +114,15 @@ export function receiveUserCollection(username, json) {
       }
     })
   }
+}
+
+export function storeUserCollection(username, collection) {
+  return {
+    type: STORE_USER_COLLECTION,
+    username,
+    collection
+  }
+
 }
 
 export function requestUserCollectionFailed(username) {

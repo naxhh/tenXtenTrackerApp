@@ -3,8 +3,13 @@ import { addGameToTracker } from '../actions'
 import GamesCollection from './GamesCollection'
 
 const mapStateToProps = (state, ownProps) => {
+  const userCollection = state.collection[state.username] || []
+
   return {
-    games: state.boardgames
+    games: userCollection.map(game => {
+      const fullGame = Object.assign(game, state.boardgames[game.id])
+      return fullGame
+    })
   }
 }
 
